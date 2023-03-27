@@ -1,0 +1,56 @@
+<div class="form-group">
+  <input
+    [formControl]="searchText"
+    (input)="searchByScrumMaster()"
+    type="text"
+    class="form-control"
+    placeholder="Search by Scrum Master"
+  />
+</div>
+
+<div class="form-group">
+  <input
+    [formControl]="searchDeveloperText"
+    (input)="searchByDeveloperName()"
+    type="text"
+    class="form-control"
+    placeholder="Search by Developer"
+  />
+</div>
+
+<div class="container">
+    <h1>Product List</h1>
+    <p *ngIf="totalProducts">Total Products: {{ totalProducts }}</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Product Number</th>
+          <th>Product Name</th>
+          <th>Scrum Master</th>
+          <th>Product Owner</th>
+          <th>Developers</th>
+          <th>Start Date</th>
+          <th>Methodology</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.productNumber }}</td>
+          <td>{{ product.productName }}</td>
+          <td>{{ product.scrumMaster }}</td>
+          <td>{{ product.productOwner }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let developer of product.developerNames">{{ developer }}</li>
+            </ul>
+          </td>
+          <td>{{ product.startDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ product.methodology }}</td>
+          <td>
+            <button (click) = "updateProduct(product.productNumber)" class = "btn btn-info">Update</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

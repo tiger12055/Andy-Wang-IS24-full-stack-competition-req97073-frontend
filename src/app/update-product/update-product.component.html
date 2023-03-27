@@ -1,0 +1,48 @@
+<div class="col-md-6 offset-md-3" *ngIf="productForm">
+    <h3>Update Product</h3>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" class="form-control" formControlName="productName">
+        <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="alert alert-danger mt-2">
+          Product name must be Characters and Numbers.
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label>Scrum Master</label>
+        <input type="text" class="form-control" formControlName="scrumMaster">
+        <div *ngIf="productForm.get('scrumMaster')?.invalid && productForm.get('scrumMaster')?.touched" class="alert alert-danger mt-2">
+          ScrumMaster name must be Characters.
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label>Product Owner</label>
+        <input type="text" class="form-control" formControlName="productOwner">
+        <div *ngIf="productForm.get('productOwner')?.invalid && productForm.get('productOwner')?.touched" class="alert alert-danger mt-2">
+          ProductOwner name must be Characters.
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <label>Developers</label>
+        <div formArrayName="developerNames">
+          <div *ngFor="let developer of developerNames.controls; index as i">
+            <input type="text" class="form-control" formControlName="{{i}}">
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary mt-2" (click)="addDeveloper()">Add Developer</button>
+      </div>
+    
+      <div class="form-group">
+        <label>Methodology</label>
+        <select class="form-control" formControlName="methodology">
+          <option [ngValue]="null" disabled>Select a methodology</option>
+          <option *ngFor="let method of methodologyOptions" [ngValue]="method">{{ method }}</option>
+        </select>
+      </div>
+    
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Update Product</button>
+    </form>
+</div>
