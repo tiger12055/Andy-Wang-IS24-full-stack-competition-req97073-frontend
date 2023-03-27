@@ -36,7 +36,7 @@ createForm(product: Product): void {
     scrumMaster: [product.scrumMaster, [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
     productOwner: [product.productOwner, [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
     developerNames: this.fb.array(
-      product.developerNames.map((name: string) => this.fb.control(name, Validators.required)),
+      product.developerNames.map((name: string) => this.fb.control(name)),
       Validators.required
     ),
     startDate: [product.startDate, Validators.required],

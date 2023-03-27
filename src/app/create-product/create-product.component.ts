@@ -26,7 +26,7 @@ export class CreateProductComponent implements OnInit {
       productName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9 ]+')]],
       scrumMaster: ['', [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
       productOwner: ['', [Validators.required, Validators.pattern('[a-zA-Z ]+')]],
-      developerNames: this.fb.array([], Validators.required),
+      developerNames: this.fb.array([]),
       startDate: ['', Validators.required],
       methodology: [null, Validators.required]
     });
