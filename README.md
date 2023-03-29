@@ -20,13 +20,12 @@ To run the application, follow these steps:
     ```
     npm install
     ```
-3. Start the development server by running:
-
-  For Unix-based systems:
+3. Start the development server by running
+   For Unix-based systems:
     ```
     npm install
     ```
-  For Windows:=
+    For Windows:=
     ```
     npm install
     ```
