@@ -4,13 +4,17 @@ import { Observable, throwError } from 'rxjs';
 import { Product } from './product';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private baseURL = "http://localhost:8088/api/products";
+  private productListSubject = new BehaviorSubject<Product[]>([]);
+  productList$ = this.productListSubject.asObservable();
+
+  private baseURL = "http://localhost:3000/api/products";
 
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) { }
 
@@ -53,5 +57,11 @@ export class ProductService {
 
   searchByDeveloperName(name: string): Observable<Product[]> {
     return this.httpClient.get<Product[]>(`${this.baseURL}/search/developer?name=${name}`);
+  }
+
+  refreshProductList() {
+    this.getProductList().subscribe((products: Product[]) => {
+      this.productListSubject.next(products);
+    });
   }
 }

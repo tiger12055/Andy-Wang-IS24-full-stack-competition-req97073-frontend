@@ -16,22 +16,23 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService,
               private router:Router) {}
 
+  // Subscribe to the productList$ observable to get the latest list of products           
   ngOnInit(): void {
-    this.getProducts();
+    this.productService.productList$.subscribe((products: Product[]) => {
+      this.products = products;
+      this.totalProducts = products.length;
+    });
+    this.productService.refreshProductList();
   }
 
-  private getProducts(){
-    this.productService.getProductList().subscribe(data =>{
-      this.products = data;
-    })
-  }
-
+  // Navigate to the update-product page with the given productNumber
   updateProduct(productNumber: number) {
     this.router.navigate(['update-product', productNumber]);
   }
 
   searchText = new FormControl('');
 
+  // Search products by Scrum Master name
   searchByScrumMaster() {
     if (this.searchText.value?.trim()) {
       this.productService
@@ -47,6 +48,7 @@ export class ProductListComponent implements OnInit {
 
   searchDeveloperText = new FormControl('');
 
+  // Search products by Developer name
   searchByDeveloperName() {
     if (this.searchDeveloperText.value?.trim()) {
       this.productService
@@ -60,7 +62,20 @@ export class ProductListComponent implements OnInit {
     }
 }
 
+ // Reload the initial list of products
   reloadData() {
-    this.getProducts();
+    this.productService.refreshProductList();
+  }
+
+  // Clear the search text for Scrum Master name
+  clearScrumMasterSearch() {
+    this.searchText.setValue('');
+    this.searchByScrumMaster();
+  }
+  
+  // Clear the search text for Developer name
+  clearDeveloperSearch() {
+    this.searchDeveloperText.setValue('');
+    this.searchByDeveloperName();
   }
 }

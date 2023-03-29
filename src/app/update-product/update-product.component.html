@@ -28,8 +28,9 @@
       <div class="form-group">
         <label>Developers</label>
         <div formArrayName="developerNames">
-          <div *ngFor="let developer of developerNames.controls; index as i">
-            <input type="text" class="form-control" formControlName="{{i}}">
+          <div *ngFor="let developer of developerNames.controls; index as i" class="d-flex align-items-center mb-2">
+            <input type="text" class="form-control" [formControlName]="i">
+            <button type="button" class="btn btn-danger ml-2" (click)="removeDeveloper(i)"><i class="fas fa-times"></i></button>
           </div>
         </div>
         <button type="button" class="btn btn-secondary mt-2" (click)="addDeveloper()">Add Developer</button>

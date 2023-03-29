@@ -6,6 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Methodology } from '../methodology';
 import { Validators } from '@angular/forms';
 
+/**
+ * Component for updating a product.
+ * Uses a reactive form to display and update product information.
+ */
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -21,6 +25,10 @@ export class UpdateProductComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) { }
 
+  /**
+   * OnInit lifecycle hook.
+   * Fetches the product being updated and creates the update form.
+   */
   ngOnInit(): void {
   this.productNumber = +this.route.snapshot.params['productNumber'];
   this.productService.getProductById(this.productNumber).subscribe((product: Product) => {
@@ -29,6 +37,10 @@ export class UpdateProductComponent implements OnInit {
   });
 }
 
+  /**
+   * Creates the form group for the update form based on a given product.
+   * @param product - The product to base the form group on.
+   */
 
 createForm(product: Product): void {
   this.productForm = this.fb.group({
@@ -44,14 +56,33 @@ createForm(product: Product): void {
   });
 }
 
+  /**
+   * Returns the form array for the developer names field.
+   * @returns The FormArray for the developer names field.
+   */
   get developerNames(): FormArray {
     return this.productForm.get('developerNames') as FormArray;
   }
 
+  /**
+   * Adds a new developer name field to the developer names FormArray.
+   */
   addDeveloper() {
     this.developerNames.push(this.fb.control(''));
   }
 
+  /**
+   * Removes a developer name field from the developer names FormArray at a given index.
+   * @param index - The index of the developer name field to remove.
+   */
+
+  removeDeveloper(index: number) {
+    this.developerNames.removeAt(index);
+  }
+
+  /**
+   * Submits the update form to update the product with new data.
+   */
   onSubmit() {
     const updatedProduct: Product = {
       productNumber: this.productNumber,
@@ -61,10 +92,19 @@ createForm(product: Product): void {
       developerNames: this.productForm.value.developerNames.map((name: string) => ({ developerName: name })),
       methodology: this.productForm.value.methodology
     };
-
-    this.productService.updateProduct(this.productNumber, updatedProduct).subscribe((updatedProduct) => {
-      console.log('Updated product:', updatedProduct);
-      this.router.navigate(['/products']);
-    });
+  
+    this.productService.updateProduct(this.productNumber, updatedProduct).subscribe(
+      (updatedProduct) => {
+        console.log('Updated product:', updatedProduct);
+        this.router.navigate(['/products']);
+      },
+      (error) => {
+        if (error.status === 400) {
+          alert(error.error);
+        } else {
+          alert("An error occurred. Please try again.");
+        }
+      }
+    );
   }
 }
