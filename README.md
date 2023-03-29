@@ -22,13 +22,11 @@ To run the application, follow these steps:
     ```
 3. Start the development server by running:
 
-For Unix-based systems:
-    
+  For Unix-based systems:
     ```
     ng serve
     ```
-For Windows:
-    
+  For Windows:  
     ```
     ng.cmd serve
     ```
