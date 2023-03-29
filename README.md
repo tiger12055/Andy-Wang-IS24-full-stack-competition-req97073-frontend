@@ -23,11 +23,11 @@ To run the application, follow these steps:
 3. Start the development server by running
    For Unix-based systems:
     ```
-    npm install
+    ng serve
     ```
     For Windows:=
     ```
-    npm install
+    ng.cmd serve
     ```
 The application will automatically reload if you change any of the source files.
 
