@@ -24,11 +24,11 @@ To run the application, follow these steps:
 
   For Unix-based systems:
     ```
-    ng serve
+    npm install
     ```
-  For Windows:  
+  For Windows:=
     ```
-    ng.cmd serve
+    npm install
     ```
 The application will automatically reload if you change any of the source files.
 
