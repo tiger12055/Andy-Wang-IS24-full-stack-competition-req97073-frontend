@@ -19,9 +19,18 @@ export class ProductService {
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) { }
 
   private handleError(error: any): Observable<never> {
-    this.snackBar.open(`Error: ${error.message}`, 'Close', {
-      duration: 5000,
+    let errorMessage = '';
+  
+    if (error.status === 0) {
+      errorMessage = 'The backend server is not running. Please start the backend server.';
+    } else {
+      errorMessage = `Error: ${error.message}`;
+    }
+  
+    this.snackBar.open(errorMessage, 'Close', {
+      duration: 3000,
     });
+  
     console.error('API Error:', error);
     return throwError(error);
   }
