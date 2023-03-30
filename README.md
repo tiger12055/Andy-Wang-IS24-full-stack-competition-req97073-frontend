@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (version 12 or later)
+- [Node.js](https://nodejs.org/) (version 15 or later, and I am using v18.15.0)
 - [Angular CLI](https://cli.angular.io/)
 
 ## Running the Application
