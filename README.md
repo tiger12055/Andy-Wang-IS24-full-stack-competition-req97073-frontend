@@ -16,16 +16,16 @@ To run the application, follow these steps:
 1. Open a terminal and navigate to the project's root directory (the same level where `package.json` is located).
 
 2. Install the project dependencies by running:
+   
     ```
     npm install
     ```
-3. Start the development server by running:
-
-For Unix-based systems:
+3. Start the development server by running
+   For Unix-based systems:
     ```
     ng serve
     ```
-For Windows:
+    For Windows:=
     ```
     ng.cmd serve
     ```
